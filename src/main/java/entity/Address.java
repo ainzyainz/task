@@ -1,7 +1,8 @@
 package entity;
 
 import lombok.*;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -21,4 +22,8 @@ public class Address extends MultiID implements Serializable {
 
     @Column
     private int house;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private List<People> people = new ArrayList<>();
 }
